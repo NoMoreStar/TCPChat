@@ -20,14 +20,14 @@ public class ClientChat {
         int port;
         DataOutputStream out;
         DataInputStream in;
-        Gestore g;
+        Gestore g;  //Classe gestore per la creazione di tutti i metodi
         Boolean chiusura;
 public ClientChat(){
         serverAddress = "localhost";
         port = 2000;
         out = null;
         in = null;
-        chiusura = true;
+        chiusura = true;  //Client online = true / client offline = false
 }
 
 public void Connetti() throws IOException{
@@ -39,7 +39,7 @@ public void Connetti() throws IOException{
 public void Invio() throws IOException{
         int scelta;
         while(chiusura == true){
-        Boolean appMenu = g.Comunica();
+        Boolean appMenu = g.Comunica();         //Variabile booleana per controllare se viene scritto un metodo
         if(appMenu == true){
             scelta = g.scelta();
             if(scelta == 1)
@@ -48,7 +48,7 @@ public void Invio() throws IOException{
                 g.Autore();
             if(scelta == 3)
                 g.CambiaStato();
-            if(scelta == 4)
+            if(scelta == 4)                                 //Scelta dei metodi
                 g.CambiaStato();
             if(scelta == 5)
                 g.Smile();

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package tcpchat;
 
 import java.io.BufferedReader;
@@ -30,13 +25,13 @@ public class Gestore{
     public Gestore(Socket s,String nome){
         tastiera = new BufferedReader(new InputStreamReader(System.in));
         stato = true;
-        connection = s;
+        connection = s;         //Passaggio del Socket
         this.nome=nome;
         inser = "";
         salva = inser;
         try {
             in = new DataInputStream(connection.getInputStream());   
-            out = new DataOutputStream(connection.getOutputStream());
+            out = new DataOutputStream(connection.getOutputStream());                       //Inizializzazione degli stream di input e output
         } catch (IOException ex) {
             Logger.getLogger(Gestore.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -51,21 +46,21 @@ public class Gestore{
         System.out.println("/end per chiudere la connessione di chi la richiede \n\n");
     }
     public void Ricevi() throws IOException{
-        System.out.println("Il " + nome + " ha detto: "+ in.readUTF());
+        System.out.println("Il " + nome + " ha detto: "+ in.readUTF());             //Metodo per la ricevuta dei messaggi
     }
-    public Boolean Comunica() throws IOException{
+    public Boolean Comunica() throws IOException{                       //Metodo per l'invio dei messaggio con controllo per la scrittura dei metodi
                 inser = tastiera.readLine();
                 if(inser.charAt(0) == '/'){
                    return true; 
                 }
-                else{
+                else{                                               
                 salva = inser;
                 out.writeUTF(inser);
                 out.flush();
                 }
                 return false;    
         }
-    public void Autore(){
+    public void Autore(){               //Metodo per il cambio di autore - Da sistemare
         String stringa = null;
         try {
             System.out.println("Inserisci il nome utente");
@@ -75,7 +70,7 @@ public class Gestore{
         }
         //nome = stringa;
     }
-    public void CambiaStato(){
+    public void CambiaStato(){          //Metodo per il cambio dello stato - Da sistemare
         if(stato==true){
             stato=false;
             System.out.println("Sei Offline");
@@ -86,7 +81,7 @@ public class Gestore{
             System.out.println("Sei Online");
         }
     }
-    public void Smile(){
+    public void Smile(){            //Metodo per l'invio dello smile - Funzionante
         inser = ":smile:";
         try {
             out.writeUTF(inser);
@@ -95,7 +90,7 @@ public class Gestore{
             Logger.getLogger(Gestore.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    public void Like(){
+    public void Like(){             //Metodo per l'invio del Like - Funzionante
          inser = ":like:";
         try {
             out.writeUTF(":Like:");
@@ -105,7 +100,7 @@ public class Gestore{
         }
         
     }
-    public void Echo(){
+    public void Echo(){             //Metodo per il reinvio della frase scritta precedentemente - Funzionante
         try {
             out.writeUTF(salva);
             out.flush();
@@ -113,10 +108,10 @@ public class Gestore{
             Logger.getLogger(Gestore.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    public Boolean End(){
+    public Boolean End(){               //Metodo per la chiusura della connessione - Funzionante
         return false;  
     }
-    public int scelta(){
+    public int scelta(){                //Metodo per controllare quale altro metodo viene scelto
         if(inser.equals("/help"))
             return 1;
         if(inser.equals("/autore"))

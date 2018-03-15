@@ -24,11 +24,11 @@ public class ServerChat {
         Socket connection;
         DataInputStream in;
         DataOutputStream out;
-        Gestore g;
-        Boolean chiusura;
+        Gestore g;      //Classe gestore per la creazione di tutti i metodi
+        Boolean chiusura; //Variabile della chiusura
     public ServerChat(){
         port=2000;
-        chiusura = true;
+        chiusura = true; //Server online = true / server offline = false
         
     }
     
@@ -46,7 +46,7 @@ public class ServerChat {
         while(chiusura == true){
             g.Ricevi();
             int scelta;
-            Boolean appMenu = g.Comunica();
+            Boolean appMenu = g.Comunica();             //Variabile booleana per controllare se viene scritto un metodo
             if(appMenu==true){
                 scelta = g.scelta();
                 if(scelta == 1)
@@ -55,7 +55,7 @@ public class ServerChat {
                     g.Autore();
                 if(scelta == 3)
                     g.CambiaStato();
-                if(scelta == 4)
+                if(scelta == 4)                                     //Scelta dei metodi
                     g.CambiaStato();
                 if(scelta == 5)
                     g.Smile();
