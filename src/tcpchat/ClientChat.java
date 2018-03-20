@@ -40,13 +40,12 @@ public void Invio() throws IOException{
     try{
         int scelta;
         while(chiusura == true){
-        Boolean appMenu = g.Comunica();         //Variabile booleana per controllare se viene scritto un metodo
-        if(appMenu == true){
-            scelta = g.scelta();
-            if(scelta == 1)
-                chiusura = g.End();
-        }
-        else
+            Boolean appMenu = g.Comunica();         //Variabile booleana per controllare se viene scritto un metodo
+            if(appMenu == true){
+                scelta = g.scelta();
+                if(scelta == 1)
+                    chiusura = g.End();
+            }
             g.Ricevi();
         }
     }catch(IOException e){
