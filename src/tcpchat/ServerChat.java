@@ -24,11 +24,11 @@ public class ServerChat {
         Socket connection;
         DataInputStream in;
         DataOutputStream out;
-        Gestore g;      //Classe gestore per la creazione di tutti i metodi
-        Boolean chiusura; //Variabile della chiusura
+        Gestore g;                  //Classe gestore per la creazione di tutti i metodi
+        Boolean chiusura;           //Variabile per la gestione della chiusura degli stream
     public ServerChat(){
-        port=2000;
-        chiusura = true; //Server online = true / server offline = false
+        port=2000;                  //Porta utilizzata per la comunicazione
+        chiusura = true;            //Server online = true / server offline = false
         
     }
     
@@ -43,34 +43,26 @@ public class ServerChat {
         g.Menu();
     }
     public void Comunica() throws IOException{
+    try{
         while(chiusura == true){
             g.Ricevi();
             int scelta;
             Boolean appMenu = g.Comunica();             //Variabile booleana per controllare se viene scritto un metodo
-            if(appMenu==true){
+            if(appMenu == true){
                 scelta = g.scelta();
                 if(scelta == 1)
-                    g.Menu();
-                if(scelta == 2)
-                    g.Autore();
-                if(scelta == 3)
-                    g.CambiaStato();
-                if(scelta == 4)                                     //Scelta dei metodi
-                    g.CambiaStato();
-                if(scelta == 5)
-                    g.Smile();
-                if(scelta == 6)
-                    g.Like();
-                if(scelta == 7)
-                    g.Echo();
-                if(scelta == 8)
                     chiusura = g.End();
             }
         }
+    }catch(IOException e){
+        System.out.println("Chisura");              //Chiusura del server se la comunicazione viene interrotta
+        sSocket.close();
+    }
     }
     public void Chiusura(){
         try {
-                if (sSocket!=null) sSocket.close();
+                if (sSocket!=null) 
+                    sSocket.close();
             } catch (IOException ex) {
                 System.err.println("Errore nella chiusura della connessione!");
             }

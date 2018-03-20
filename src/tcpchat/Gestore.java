@@ -113,21 +113,21 @@ public class Gestore{
     }
     public int scelta(){                //Metodo per controllare quale altro metodo viene scelto
         if(inser.equals("/help"))
-            return 1;
+            this.Menu();
         if(inser.equals("/autore"))
-            return 2;
+            this.Autore();
         if(inser.equals("/nonlinea"))
-            return 3;
+            this.CambiaStato();
         if(inser.equals("/inlinea"))
-            return 4;
+            this.CambiaStato();
         if(inser.equals("/smile"))
-            return 5;
+            this.Smile();
         if(inser.equals("/like"))
-            return 6;
+            this.Like();
         if(inser.equals("/echo"))
-            return 7;
+            this.Echo();
         if(inser.equals("/end"))
-            return 8;
+            return 1;
     return 0;
     }
 }
